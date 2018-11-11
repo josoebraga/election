@@ -14,7 +14,7 @@ public class ElectionCandidateResultOutput {
     private Long totalVotes;
 
     public CandidateOutput getCandidate() {
-        return candidate;
+        return this.candidate;
     }
 
     public void setCandidate(CandidateOutput candidate) {
@@ -22,7 +22,7 @@ public class ElectionCandidateResultOutput {
     }
 
     public Long getTotalVotes() {
-        return totalVotes;
+        return this.totalVotes;
     }
 
     public void setTotalVotes(Long totalVotes) {

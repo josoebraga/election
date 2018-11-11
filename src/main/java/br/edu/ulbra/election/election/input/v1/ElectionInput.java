@@ -14,7 +14,7 @@ public class ElectionInput {
     private String description;
 
     public Integer getYear() {
-        return year;
+        return this.year;
     }
 
     public void setYear(Integer year) {
@@ -22,7 +22,7 @@ public class ElectionInput {
     }
 
     public String getStateCode() {
-        return stateCode;
+        return this.stateCode;
     }
 
     public void setStateCode(String stateCode) {
@@ -30,7 +30,7 @@ public class ElectionInput {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {

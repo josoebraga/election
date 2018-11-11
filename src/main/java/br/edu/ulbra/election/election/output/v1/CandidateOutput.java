@@ -16,7 +16,7 @@ public class CandidateOutput {
     private PartyOutput partyOutput;
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -24,7 +24,7 @@ public class CandidateOutput {
     }
 
     public Long getNumberElection() {
-        return numberElection;
+        return this.numberElection;
     }
 
     public void setNumberElection(Long numberElection) {
@@ -32,7 +32,7 @@ public class CandidateOutput {
     }
 
     public PartyOutput getPartyOutput() {
-        return partyOutput;
+        return this.partyOutput;
     }
 
     public void setPartyOutput(PartyOutput partyOutput) {
