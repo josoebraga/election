@@ -71,7 +71,16 @@ public class ElectionService {
             throw new GenericOutputException(MESSAGE_ELECTION_NOT_FOUND);
         }
 
-        election.setYear(electionInput.getYear());
+
+
+        if(electionInput.getYear() >= 2000 & electionInput.getYear() <= 2200) {
+            election.setYear(electionInput.getYear());
+        } else {
+            throw new GenericOutputException("Invalid year");
+        }
+
+
+
         election.setStateCode(electionInput.getStateCode());
         election.setDescription(electionInput.getDescription());
         election = electionRepository.save(election);
