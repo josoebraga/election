@@ -9,7 +9,7 @@ public class Election {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private Integer year;
 
     @Column(nullable = false)
@@ -34,6 +34,14 @@ public class Election {
         this.year = year;
     }
 
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -41,16 +49,5 @@ public class Election {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-    public String getStateCode() {
-        return stateCode;
-    }
-
-    public void setStateCode(String stateCode) {
-        this.stateCode = description;
-    }
-
-
 
 }

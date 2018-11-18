@@ -2,9 +2,6 @@ package br.edu.ulbra.election.election.input.v1;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Mod11Check;
-
-import java.util.Collections;
 
 @ApiModel(description = "Election Input Information")
 public class ElectionInput {
@@ -16,14 +13,8 @@ public class ElectionInput {
     @ApiModelProperty(example = "Senator", notes = "Election Description")
     private String description;
 
-
-
-
-
-
-
     public Integer getYear() {
-        return this.year;
+        return year;
     }
 
     public void setYear(Integer year) {
@@ -31,7 +22,7 @@ public class ElectionInput {
     }
 
     public String getStateCode() {
-        return this.stateCode;
+        return stateCode;
     }
 
     public void setStateCode(String stateCode) {
@@ -39,7 +30,7 @@ public class ElectionInput {
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public void setDescription(String description) {

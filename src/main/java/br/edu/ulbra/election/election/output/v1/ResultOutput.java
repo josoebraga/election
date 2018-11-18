@@ -20,7 +20,7 @@ public class ResultOutput {
     private Long nullVotes;
 
     public ElectionOutput getElection() {
-        return this.election;
+        return election;
     }
 
     public void setElection(ElectionOutput election) {
@@ -28,7 +28,7 @@ public class ResultOutput {
     }
 
     public List<ElectionCandidateResultOutput> getCandidates() {
-        return this.candidates;
+        return candidates;
     }
 
     public void setCandidates(List<ElectionCandidateResultOutput> candidates) {
@@ -36,7 +36,7 @@ public class ResultOutput {
     }
 
     public Long getTotalVotes() {
-        return this.totalVotes;
+        return totalVotes;
     }
 
     public void setTotalVotes(Long totalVotes) {
@@ -44,7 +44,7 @@ public class ResultOutput {
     }
 
     public Long getBlankVotes() {
-        return this.blankVotes;
+        return blankVotes;
     }
 
     public void setBlankVotes(Long blankVotes) {
@@ -52,7 +52,7 @@ public class ResultOutput {
     }
 
     public Long getNullVotes() {
-        return this.nullVotes;
+        return nullVotes;
     }
 
     public void setNullVotes(Long nullVotes) {

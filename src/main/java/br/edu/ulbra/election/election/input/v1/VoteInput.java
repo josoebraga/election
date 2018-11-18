@@ -10,17 +10,14 @@ public class VoteInput {
     private Long electionId;
     @ApiModelProperty(example = "2", notes = "Voter Unique Identifier")
     private Long voterId;
-    @ApiModelProperty(example = "3", notes = "Candidate Unique Identifier")
+    @ApiModelProperty(example = "77100", notes = "Candidate Number")
+    private Long candidateNumber;
+
+    @ApiModelProperty(example = "1", notes = "Candidate ID")
     private Long candidateId;
 
-    VoteInput(Long electionId, Long voterId, Long candidateId) { ///
-        this.electionId = electionId;
-        this.voterId = voterId;
-        this.candidateId = candidateId;
-    } ///
-
     public Long getElectionId() {
-        return this.electionId;
+        return electionId;
     }
 
     public void setElectionId(Long electionId) {
@@ -28,15 +25,23 @@ public class VoteInput {
     }
 
     public Long getVoterId() {
-        return this.voterId;
+        return voterId;
     }
 
     public void setVoterId(Long voterId) {
         this.voterId = voterId;
     }
 
+    public Long getCandidateNumber() {
+        return candidateNumber;
+    }
+
+    public void setCandidateNumber(Long candidateNumber) {
+        this.candidateNumber = candidateNumber;
+    }
+
     public Long getCandidateId() {
-        return this.candidateId;
+        return candidateId;
     }
 
     public void setCandidateId(Long candidateId) {

@@ -3,26 +3,23 @@ package br.edu.ulbra.election.election.api.v1;
 import br.edu.ulbra.election.election.input.v1.ElectionInput;
 import br.edu.ulbra.election.election.output.v1.ElectionOutput;
 import br.edu.ulbra.election.election.output.v1.GenericOutput;
-import br.edu.ulbra.election.election.repository.ElectionRepository;
 import br.edu.ulbra.election.election.service.ElectionService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/v1/election")
 public class ElectionApi {
 
-    private final ElectionRepository electionRepository;
     private final ElectionService electionService;
 
     @Autowired
-    public ElectionApi(ElectionService electionService, ElectionRepository electionRepository){
+    public ElectionApi(ElectionService electionService){
         this.electionService = electionService;
-        this.electionRepository = electionRepository;
     }
 
     @GetMapping("/")
@@ -33,13 +30,13 @@ public class ElectionApi {
 
     @GetMapping("/year/{year}")
     @ApiOperation(value = "Get election List by year")
-    public List<ElectionOutput> getByYear(@PathVariable(name = "year") Integer year){
-        return electionRepository.findByYear(year);
+    public List<ElectionOutput> getByYear(@PathVariable Integer year){
+        return new ArrayList<>();
     }
 
     @GetMapping("/{electionId}")
     @ApiOperation(value = "Get election by Id")
-    public ElectionOutput getById(@PathVariable(name = "electionId") Long electionId) {
+    public ElectionOutput getById(@PathVariable Long electionId){
         return electionService.getById(electionId);
     }
 
