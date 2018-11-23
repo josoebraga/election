@@ -90,9 +90,44 @@ public class VoteService {
         }
         ////////////
 
+        //Validar todos os itens do model
+
+System.out.println(
+ "    Election Id: " +       voteInput.getElectionId() +
+ "    Election Id: " +       election.getId() +
+ "    Election Id: " +       election.getDescription() +
+ "    Election Id: " +       election.getStateCode() +
+ "    Election Id: " +       election.getYear() +
+ "    :::::::::::: " +
+ "  - Voter Id: " +       voteInput.getVoterId() +
+ "  - Candidate Number: " +      voteInput.getCandidateNumber() +
+ "  - Candidate Id: " +      voteInput.getCandidateId()
+);
+
+        vote.setCandidateId(voteInput.getCandidateId());
+
+/*
+*
+setId(Long id)
+setVoterId(Long voterId)
+setCandidateId(Long candidateId)
+setBlankVote(Boolean blankVote)
+setNullVote(Boolean nullVote)
+setElection(Election election)
+*
+*
+* */
+
+
 /***************************************/
 
         voteRepository.save(vote);
+
+        System.out.println(voteRepository.count());
+
+        System.out.println(voteRepository.findAll());
+
+
 
         return new GenericOutput("OK");
 
