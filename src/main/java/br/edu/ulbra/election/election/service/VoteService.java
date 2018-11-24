@@ -22,16 +22,16 @@ import java.util.List;
 public class VoteService {
 
     private final VoteRepository voteRepository;
-
     private final ElectionRepository electionRepository;
-
     private final VoterClientService voterClientService;
     private final ElectionClientService electionClientService;
     private final CandidateClientService candidateClientService;
-
     private final CandidateRepository candidateRepository;
-
     private final ModelMapper modelMapper;
+    private static final String MESSAGE_INVALID_ELECTION_ID = "Invalid Election Id";
+    private static final String MESSAGE_INVALID_VOTER_ID = "Invalid Voter Id";
+    private static final String MESSAGE_INVALID_TO_VOTE_AGAIN = "The Voter has voted in this election and is not possible to vote again";
+
 
     @Autowired
     public VoteService(VoteRepository voteRepository, ElectionRepository electionRepository, VoterClientService voterClientService, ElectionClientService electionClientService, CandidateClientService candidateClientService, CandidateRepository candidateRepository, ModelMapper modelMapper){
@@ -45,6 +45,28 @@ public class VoteService {
 
         this.modelMapper = modelMapper;
     }
+
+
+    public String findFirstByElectionId(Long electionId){
+        try {
+            Long existsElectionId;
+        existsElectionId = voteRepository.countAllByElection_Id(electionId);
+            return existsElectionId.toString();
+        } catch (Exception e) {
+            throw new GenericOutputException(MESSAGE_INVALID_ELECTION_ID);
+        }
+    }
+
+    public String findFirstByVoterId(Long voterId){
+        try {
+            Long existsVoterId;
+            existsVoterId = voteRepository.countAllByVoterId(voterId);
+            return existsVoterId.toString();
+        } catch (Exception e) {
+            throw new GenericOutputException(MESSAGE_INVALID_VOTER_ID);
+        }
+    }
+
 
     public GenericOutput electionVote(VoteInput voteInput){
 
@@ -91,7 +113,7 @@ public class VoteService {
         ////////////
 
         //Validar todos os itens do model
-
+/*
 System.out.println(
  "    Election Id: " +       voteInput.getElectionId() +
  "    Election Id: " +       election.getId() +
@@ -103,7 +125,7 @@ System.out.println(
  "  - Candidate Number: " +      voteInput.getCandidateNumber() +
  "  - Candidate Id: " +      voteInput.getCandidateId()
 );
-
+*/
         vote.setCandidateId(voteInput.getCandidateId());
 
 /*
@@ -154,6 +176,15 @@ setElection(Election election)
         }
         // TODO: Validate voter
 
+        Long amountPerVoter;
+        amountPerVoter = voteRepository.countAllByVoterIdAndElection_Id(voteInput.getVoterId(), electionId);
+
+        //System.out.println("Voter ID: " + voteInput.getVoterId() + " | Election ID: " + electionId + " | Total: " + amountPerVoter);
+
+        if(amountPerVoter > 0) {
+            throw new GenericOutputException(MESSAGE_INVALID_TO_VOTE_AGAIN);
+        }
+
 /***************************************/
 
 //Um voto deve estar vinculado a um eleitor eleição válido.
@@ -184,4 +215,5 @@ setElection(Election election)
 
         return election;
     }
+
 }

@@ -7,20 +7,24 @@ import io.swagger.annotations.ApiModelProperty;
 public class CandidateOutput {
 
     @ApiModelProperty(example = "1", notes = "Candidate Unique Identification")
-    private Long candidateId;
+    private Long id;
     @ApiModelProperty(example = "John Doe", notes = "Candidate name")
     private String name;
     @ApiModelProperty(example = "77654", notes = "Candidate Election Number")
     private Long numberElection;
+    @ApiModelProperty(notes = "Candidate Election Data")
+    private ElectionOutput electionOutput;
     @ApiModelProperty(notes = "Candidate Party Data")
     private PartyOutput partyOutput;
+    @ApiModelProperty(notes = "Candidate Party Id")
+    private Long partyId;
 
     public Long getId() {
-        return this.candidateId;
+        return id;
     }
 
     public void setId(Long id) {
-        this.candidateId = candidateId;
+        this.id = id;
     }
 
     public String getName() {
@@ -39,6 +43,14 @@ public class CandidateOutput {
         this.numberElection = numberElection;
     }
 
+    public ElectionOutput getElectionOutput() {
+        return electionOutput;
+    }
+
+    public void setElectionOutput(ElectionOutput electionOutput) {
+        this.electionOutput = electionOutput;
+    }
+
     public PartyOutput getPartyOutput() {
         return partyOutput;
     }
@@ -46,4 +58,13 @@ public class CandidateOutput {
     public void setPartyOutput(PartyOutput partyOutput) {
         this.partyOutput = partyOutput;
     }
+
+    public Long getPartyId() {
+        return partyId;
+    }
+
+    public void setPartyId(Long partyId) {
+        this.partyId = partyId;
+    }
+
 }

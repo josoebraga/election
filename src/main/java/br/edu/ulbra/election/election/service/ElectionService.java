@@ -1,6 +1,6 @@
 package br.edu.ulbra.election.election.service;
 
-import br.edu.ulbra.election.election.client.CandidateClientService;
+import br.edu.ulbra.election.election.client.CandidateClientService2;
 import br.edu.ulbra.election.election.client.VoterClientService;
 import br.edu.ulbra.election.election.enums.StateCodes;
 import br.edu.ulbra.election.election.exception.GenericOutputException;
@@ -25,12 +25,12 @@ public class ElectionService {
 
     private final ElectionRepository electionRepository;
     private final VoteRepository voteRepository;
-    private final CandidateClientService candidateClientService;
+    private final CandidateClientService2 candidateClientService;
 
     private final ModelMapper modelMapper;
     
     @Autowired
-    public ElectionService(ElectionRepository electionRepository, CandidateClientService candidateClientService, VoteRepository voteRepository, ModelMapper modelMapper){
+    public ElectionService(ElectionRepository electionRepository, CandidateClientService2 candidateClientService, VoteRepository voteRepository, ModelMapper modelMapper){
         this.electionRepository = electionRepository;
         this.voteRepository = voteRepository;
         this.candidateClientService = candidateClientService;
@@ -41,7 +41,7 @@ public class ElectionService {
     private static final String MESSAGE_INVALID_ID = "Invalid id";
     private static final String MESSAGE_ELECTION_NOT_FOUND = "Election not found";
     private static final String MESSAGE_ELECTION_WITH_VOTES_FOUND = "You can not delete an election with votes!";
-    private static final String MESSAGE_ELECTION_WITH_CANDIDATES_FOUND = "You can not delete an election with candidates!";
+    private static final String MESSAGE_ELECTION_WITH_CANDIDATES_FOUND = "You can not alter or delete an election with candidates!";
 
     public List<ElectionOutput> getAll(){
         Type electionOutputListType = new TypeToken<List<ElectionOutput>>(){}.getType();
@@ -84,19 +84,16 @@ public class ElectionService {
         /**************/
 
         //Não pode ser excluída ou alterada uma eleição com votos.
-        Vote vote = voteRepository.findById(electionId).orElse(null);
+        Vote vote = voteRepository.findFirstByElectionId(electionId);
         if (vote != null){
             throw new GenericOutputException(MESSAGE_ELECTION_WITH_VOTES_FOUND);
         }
         /**************/
 
-        /* Não pode ser excluída ou alterada uma eleição com candidatos vinculados. */
+        List<Long> candidateOutput = candidateClientService.getById(electionId);
 
-        CandidateOutput candidateOutput;
-
-        candidateOutput = candidateClientService.getById(vote.getCandidateId());
-
-        if(candidateOutput.getName() != null) {
+        String electionIdBat = "["+electionId+"]";
+        if (candidateOutput.toString().equals(electionIdBat)){
             throw new GenericOutputException(MESSAGE_ELECTION_WITH_CANDIDATES_FOUND);
         }
 
@@ -121,19 +118,17 @@ public class ElectionService {
 
         /**************/
         //Não pode ser excluída ou alterada uma eleição com votos.
-        Vote vote = voteRepository.findById(electionId).orElse(null);
+        Vote vote = voteRepository.findFirstByElectionId(electionId);
         if (vote != null){
             throw new GenericOutputException(MESSAGE_ELECTION_WITH_VOTES_FOUND);
         }
         /**************/
 
         /* Não pode ser excluída ou alterada uma eleição com candidatos vinculados. */
+        List<Long> candidateOutput = candidateClientService.getById(electionId);
 
-        CandidateOutput candidateOutput;
-
-        candidateOutput = candidateClientService.getById(vote.getCandidateId());
-
-        if(candidateOutput.getName() != null) {
+        String electionIdBat = "["+electionId+"]";
+        if (candidateOutput.toString().equals(electionIdBat)){
             throw new GenericOutputException(MESSAGE_ELECTION_WITH_CANDIDATES_FOUND);
         }
 
