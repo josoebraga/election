@@ -47,6 +47,10 @@ public class CandidateOutput {
         return electionOutput;
     }
 
+    public Long getElectionOutputId() {
+        return electionOutput.getId();
+    }
+
     public void setElectionOutput(ElectionOutput electionOutput) {
         this.electionOutput = electionOutput;
     }
