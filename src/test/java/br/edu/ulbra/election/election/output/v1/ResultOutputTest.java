@@ -45,4 +45,44 @@ public class ResultOutputTest {
     @Test
     public void setNullVotes() {
     }
+
+    @Test
+    public void getElection1() {
+    }
+
+    @Test
+    public void setElection1() {
+    }
+
+    @Test
+    public void getCandidates1() {
+    }
+
+    @Test
+    public void setCandidates1() {
+    }
+
+    @Test
+    public void getTotalVotes1() {
+    }
+
+    @Test
+    public void setTotalVotes1() {
+    }
+
+    @Test
+    public void getBlankVotes1() {
+    }
+
+    @Test
+    public void setBlankVotes1() {
+    }
+
+    @Test
+    public void getNullVotes1() {
+    }
+
+    @Test
+    public void setNullVotes1() {
+    }
 }

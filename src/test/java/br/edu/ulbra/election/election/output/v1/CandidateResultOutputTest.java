@@ -29,4 +29,28 @@ public class CandidateResultOutputTest {
     @Test
     public void setTotalVotes() {
     }
+
+    @Test
+    public void getElection1() {
+    }
+
+    @Test
+    public void setElection1() {
+    }
+
+    @Test
+    public void getCandidate1() {
+    }
+
+    @Test
+    public void setCandidate1() {
+    }
+
+    @Test
+    public void getTotalVotes1() {
+    }
+
+    @Test
+    public void setTotalVotes1() {
+    }
 }

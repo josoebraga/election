@@ -37,4 +37,36 @@ public class ElectionTest {
     @Test
     public void setStateCode() {
     }
+
+    @Test
+    public void getId1() {
+    }
+
+    @Test
+    public void setId1() {
+    }
+
+    @Test
+    public void getYear1() {
+    }
+
+    @Test
+    public void setYear1() {
+    }
+
+    @Test
+    public void getStateCode1() {
+    }
+
+    @Test
+    public void setStateCode1() {
+    }
+
+    @Test
+    public void getDescription1() {
+    }
+
+    @Test
+    public void setDescription1() {
+    }
 }

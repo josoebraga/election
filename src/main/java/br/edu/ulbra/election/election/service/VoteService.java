@@ -10,6 +10,7 @@ import br.edu.ulbra.election.election.repository.CandidateRepository;
 import br.edu.ulbra.election.election.repository.ElectionRepository;
 import br.edu.ulbra.election.election.repository.VoteRepository;
 import br.edu.ulbra.election.election.client.VoterClientService;
+import br.edu.ulbra.election.election.client.LoginClientService;
 import br.edu.ulbra.election.election.client.ElectionClientService;
 import feign.FeignException;
 import org.modelmapper.ModelMapper;
@@ -24,6 +25,7 @@ public class VoteService {
     private final VoteRepository voteRepository;
     private final ElectionRepository electionRepository;
     private final VoterClientService voterClientService;
+    private final LoginClientService loginClientService;
     private final ElectionClientService electionClientService;
     private final CandidateClientService candidateClientService;
     private final CandidateRepository candidateRepository;
@@ -34,11 +36,12 @@ public class VoteService {
 
 
     @Autowired
-    public VoteService(VoteRepository voteRepository, ElectionRepository electionRepository, VoterClientService voterClientService, ElectionClientService electionClientService, CandidateClientService candidateClientService, CandidateRepository candidateRepository, ModelMapper modelMapper){
+    public VoteService(VoteRepository voteRepository, ElectionRepository electionRepository, VoterClientService voterClientService, LoginClientService loginClientService, ElectionClientService electionClientService, CandidateClientService candidateClientService, CandidateRepository candidateRepository, ModelMapper modelMapper){
         this.voteRepository = voteRepository;
         this.electionRepository = electionRepository;
         this.voterClientService = voterClientService;
         this.electionClientService = electionClientService;
+        this.loginClientService = loginClientService;
         this.candidateClientService = candidateClientService;
 
         this.candidateRepository = candidateRepository;
@@ -149,11 +152,7 @@ setElection(Election election)
 
         System.out.println(voteRepository.findAll());
 
-
-
         return new GenericOutput("OK");
-
-
 
         //return modelMapper.map(electionVote., GenericOutput.class);
 
@@ -175,6 +174,29 @@ setElection(Election election)
             throw new GenericOutputException("Invalid Voter");
         }
         // TODO: Validate voter
+
+/***************************************/
+
+//        Validar se o usuário que está votando é o mesmo usuário que se autenticou.
+
+        try{
+            VoterOutput voterOutputLogin;
+            voterOutputLogin = this.loginClientService.checkTokenByVoterId(voteInput.getVoterId());
+            if (voterOutputLogin.getId() == null){
+                throw new GenericOutputException("Voter is not logged in");
+            }
+            if (voterOutputLogin.getId() != voteInput.getVoterId()) {
+                throw new GenericOutputException("The voter does not match who is logged in");
+            }
+        } catch (FeignException e){
+            if (e.status() == 500) {
+                throw new GenericOutputException("Expired Token");
+            }
+            if (e.status() == 404) {
+                throw new GenericOutputException("Voter is not logged in and therefore did not generate the token");
+            }
+        }
+/***************************************/
 
         Long amountPerVoter;
         amountPerVoter = voteRepository.countAllByVoterIdAndElection_Id(voteInput.getVoterId(), electionId);
@@ -211,7 +233,9 @@ setElection(Election election)
             }
         }
 
+
 /***************************************/
+
 
         return election;
     }

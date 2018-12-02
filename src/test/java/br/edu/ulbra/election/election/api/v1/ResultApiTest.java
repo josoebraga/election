@@ -13,4 +13,20 @@ public class ResultApiTest {
     @Test
     public void getResultByCandidate() {
     }
+
+    @Test
+    public void getResultByElection1() {
+    }
+
+    @Test
+    public void getResultByCandidate1() {
+    }
+
+    @Test
+    public void getResultByElection2() {
+    }
+
+    @Test
+    public void getResultByCandidate2() {
+    }
 }

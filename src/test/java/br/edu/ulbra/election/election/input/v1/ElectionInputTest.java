@@ -29,4 +29,28 @@ public class ElectionInputTest {
     @Test
     public void setDescription() {
     }
+
+    @Test
+    public void getYear1() {
+    }
+
+    @Test
+    public void setYear1() {
+    }
+
+    @Test
+    public void getStateCode1() {
+    }
+
+    @Test
+    public void setStateCode1() {
+    }
+
+    @Test
+    public void getDescription1() {
+    }
+
+    @Test
+    public void setDescription1() {
+    }
 }
